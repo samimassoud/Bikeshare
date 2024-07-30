@@ -276,6 +276,21 @@ def user_stats(df):
     print("\nAll The Statistics took %s seconds." % (time.time() - total_start_time))
     print('-'*40)
 
+def preview_data(df):
+    """Displays raw data of the filtered bikeshare users, upon request"""
+    view_data = input("\nWould you like to view 5 rows of individual trip data? Enter yes or no\n").lower()
+    start_loc = 0
+    if(view_data == "yes"):
+        while (True):
+            print(df.iloc[start_loc:(start_loc+5)])
+            start_loc+=5
+            view_data = input("Do you wish to continue?:\nPress 'Enter' to continue\n Enter no to stop\n").lower()
+            if(view_data =="no"):
+                break
+            else:
+                continue
+
+
 
 def main():
     while True:
@@ -286,7 +301,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-
+        preview_data(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
