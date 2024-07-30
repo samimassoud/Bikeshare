@@ -231,6 +231,15 @@ def user_stats(df):
         print("Gender is Not Regarded in The Washington CSV File")
 
     # Display earliest, most recent, and most common year of birth
+    if(df['city']!="Washington"):
+        earliest_year_of_birth = int(df['Birth Year'].min())
+        most_recent_year_of_birth = int(df['Birth Year'].max())
+        most_common_year_of_birth = int(df['Birth Year'].mode()[0])
+        print("The Earliest Year of Birth: ", earliest_year_of_birth)
+        print("The Most Recent Year of Birth: ", most_recent_year_of_birth)
+        print("The Most Common Year of Birth: ", most_common_year_of_birth)
+    else:
+        print("Birth Date is Not Regarded in The Washington CSV File")
 
 
     print("\All The Statistics took %s seconds." % (time.time() - total_start_time))
