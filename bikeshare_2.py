@@ -114,20 +114,37 @@ def load_data(city, month, day):
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
+    months = ['january','february','march','april','may','june']
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-    start_time = time.time()
-
+    print('\n')
+    total_start_time=time.time()
     # display the most common month
+    print('Calculating The Most Common Month...\n')
+    start_time = time.time()
+    common_month_index = df['month'].mode()[0]
+    print("Most Common Month: ", months[common_month_index-1].title())
+    print("\nThis took %s seconds." %(time.time()- start_time))
+    print('-'*40)
 
 
     # display the most common day of week
-
+    print('Calculating The Most Common Day of The Week...\n')
+    start_time = time.time()
+    common_day = df['day'].mode()[0]
+    print("Most Common Day of The Week: ", common_day )
+    print("\nThis took %s seconds." %(time.time()- start_time))
+    print('-'*40)
 
     # display the most common start hour
+    print('Calculating The Most Common Start Hour...\n')
+    start_time = time.time()
+    common_hour = df['hour'].mode()[0]
+    print("Most Common Start Hour: ", common_hour)
+    print("\nThis took %s seconds." %(time.time()- start_time))
+    print('-'*40)
 
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nAll Statistics took %s seconds." % (time.time() - total_start_time))
     print('-'*40)
 
 
