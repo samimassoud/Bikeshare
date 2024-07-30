@@ -22,47 +22,71 @@ def get_filters():
     time_filters = ['month', 'day', 'both', 'none']
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
-        city = input("Would you like to see data for Chicago, New York City, or Washington? ").lower()
+        city = input("Would you like to see data for Chicago, New York City, or Washington?\n").lower()
         if city in cities:
-            break
+            choice = input("It looks like you have entered " + city.title() +". If you want to cancel enter 'n'\nIf you wish to proceed press any key\n").lower()
+            if(choice =='n'):
+                continue
+            else:
+                break
         else:
             print("Invalid input. Please choose one of the current options: Chicago, New York City, or Washington.")
     while True:
-        time_filter = input ("Would you like to filter the data by month, day, both, or not at all? Type \"none\" for no time filter.").lower()
+        time_filter = input ("Would you like to filter the data by month, day, both, or not at all? Type \"none\" for no time filter.\n").lower()
         if time_filter in time_filters:
-            break
+            choice = input("It looks like you have entered " + time_filter.title() +". If you want to cancel enter 'n'\nIf you wish to proceed press any key\n").lower()
+            if(choice =='n'):
+                continue
+            else:
+                break
         else:
             print("Please choose one of the available time filter's options")
     if(time_filter=="both"):
         # get user input for month (all, january, february, ... , june)
         while True:
-            month = input("Which month? January, February, March, April, May, June or All?").lower()
+            month = input("Which month? January, February, March, April, May, June or All?\n").lower()
             if month in months:
-                break
+                choice = input("It looks like you have entered " + month.title() +". If you want to cancel enter 'n'\nIf you wish to proceed press any key\n").lower()
+                if(choice =='n'):
+                    continue
+                else:
+                    break
             else:
                 print("Invalid input. Please choose one of the available month's options")
 
         # get user input for day of week (all, monday, tuesday, ... sunday)
         while True:
-            day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All?").lower()
+            day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All?\n").lower()
             if day in days:
-                break
+                choice = input("It looks like you have entered " + day.title() +". If you want to cancel enter 'n'\nIf you wish to proceed press any key\n").lower()
+                if(choice =='n'):
+                    continue
+                else:
+                    break
             else:
                 print("Invalid input. Please choose one of the available day's options.")
     elif(time_filter=="month"):
         day="all"
         while True:
-            month = input("Which month? January, February, March, April, May, June or All?").lower()
+            month = input("Which month? January, February, March, April, May, June or All?\n").lower()
             if month in months:
-                break
+                choice = input("It looks like you have entered " + month.title() +". If you want to cancel enter 'n'\nIf you wish to proceed press any key\n").lower()
+                if(choice =='n'):
+                    continue
+                else:
+                    break
             else:
                 print("Invalid input. Please choose one of the available month's options")
     elif(time_filter=="day"):
         month="all"
         while True:
-            day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All?").lower()
+            day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All?\n").lower()
             if day in days:
-                break
+                choice = input("It looks like you have entered " + day.title() +". If you want to cancel enter 'n'\nIf you wish to proceed press any key\n").lower()
+                if(choice =='n'):
+                    continue
+                else:
+                    break
             else:
                 print("Invalid input. Please choose one of the available day's options.")
     else:
@@ -191,14 +215,21 @@ def trip_duration_stats(df):
     # display total travel time
     print("Calculating The Total Travel Time...\n")
     start_time = time.time()
-    print("Total Travel Time:\n", df['Trip Duration'].sum(), " seconds")
+    total_travel_time = df['Trip Duration'].sum()
+    hours = total_travel_time // 3600
+    minutes = (total_travel_time % 3600) // 60
+    seconds = (total_travel_time % 3600) % 60
+    print("Total Travel Time:\n")
+    print(f"{total_travel_time} Seconds")
+    print(f"{total_travel_time / 60:.2f} Minutes")
+    print(f"{hours} Hours: {minutes} Minutes: {seconds} Seconds\n")
     print("\nThis took %s seconds." %(time.time()- start_time))
     print('-'*40)
 
     # display mean travel time
     print("Calculating The Mean Travel Time...\n")
     start_time = time.time()
-    print("Total Travel Time:\n", df['Trip Duration'].mean(), " seconds")
+    print("Mean Travel Time:\n", df['Trip Duration'].mean(), " seconds")
     print("\nThis took %s seconds." %(time.time()- start_time))
     print('-'*40)
 
