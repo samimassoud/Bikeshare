@@ -191,18 +191,18 @@ def trip_duration_stats(df):
     # display total travel time
     print("Calculating The Total Travel Time...\n")
     start_time = time.time()
-    print("Total Travel Time: ", df['Trip Duration'].sum(), " seconds")
+    print("Total Travel Time:\n", df['Trip Duration'].sum(), " seconds")
     print("\nThis took %s seconds." %(time.time()- start_time))
     print('-'*40)
 
     # display mean travel time
     print("Calculating The Mean Travel Time...\n")
     start_time = time.time()
-    print("Total Travel Time: ", df['Trip Duration'].mean(), " seconds")
+    print("Total Travel Time:\n", df['Trip Duration'].mean(), " seconds")
     print("\nThis took %s seconds." %(time.time()- start_time))
     print('-'*40)
 
-    print("\nThis took %s seconds." % (time.time() - total_start_time))
+    print("\nAll statistics took %s seconds " % (time.time() - total_start_time))
     print('-'*40)
 
 
@@ -210,18 +210,30 @@ def user_stats(df):
     """Displays statistics on bikeshare users."""
 
     print('\nCalculating User Stats...\n')
-    start_time = time.time()
+    total_start_time = time.time()
 
     # Display counts of user types
-
+    print("Calculating The Count Of User Types...\n")
+    start_time = time.time()
+    print("User Types Counts:\n", df['User Type'].value_counts())
+    print("\nThis took %s seconds." %(time.time()- start_time))
+    print('-'*40)
+    
 
     # Display counts of gender
-
+    if(df['city']!="Washington"):
+        print("Calculating The Count Of Gender...\n")
+        start_time = time.time()
+        print("Gender Counts:\n", df['Gender'].value_counts())
+        print("\nThis took %s seconds." %(time.time()- start_time))
+        print('-'*40)
+    else:
+        print("Gender is Not Regarded in The Washington CSV File")
 
     # Display earliest, most recent, and most common year of birth
 
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\All The Statistics took %s seconds." % (time.time() - total_start_time))
     print('-'*40)
 
 
