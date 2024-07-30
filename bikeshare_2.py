@@ -95,7 +95,19 @@ def load_data(city, month, day):
     df['month'] = df['Start Time'].dt.month
     df['day'] = df['Start Time'].dt.day_name()
     df['hour'] = df['Start Time'].dt.hour
-    
+    months = ['january','february','march','april','may','june']
+    days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    #Filter by month if it 'all' option wasn't chosen
+    if month != "all":
+        month_index = months.index(month) + 1 #so that 1 is Jan and so on, so that it is compatiable with .dt.month resulting column
+        df = df[df['month'] == month_index]
+        #Filtered by month
+    if day != "all":
+        df = df[df['day'] == day.title()] # .title() so that it is compatiable with .dt.day_name() resulting column
+    #Didn't use elif, because there is 'both' option, meaning that
+    #  one being filtered doesn't necessarily means that the other isn't.
+    #If 'none' was chosen then it would skip the filtering, meaning that
+    #  it will give me the right 'df' that I'm after.
 
     return df
 
