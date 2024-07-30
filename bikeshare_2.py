@@ -16,14 +16,59 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
+    cities = ['chicago','new york city', 'washington']
+    months = ['all','january','february','march','april','may','june']
+    days = ['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    time_filters = ['month', 'day', 'both', 'none']
     # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    while True:
+        city = input("Would you like to see data for Chicago, New York City, or Washington? ").lower()
+        if city in cities:
+            break
+        else:
+            print("Invalid input. Please choose one of the current options: Chicago, New York City, or Washington.")
+    while True:
+        time_filter = input ("Would you like to filter the data by month, day, both, or not at all? Type \"none\" for no time filter.").lower()
+        if time_filter in time_filters:
+            break
+        else:
+            print("Please choose one of the available time filter's options")
+    if(time_filter=="both"):
+        # get user input for month (all, january, february, ... , june)
+        while True:
+            month = input("Which month? January, February, March, April, May, June or All?").lower()
+            if month in months:
+                break
+            else:
+                print("Invalid input. Please choose one of the available month's options")
 
-
-    # get user input for month (all, january, february, ... , june)
-
-
-    # get user input for day of week (all, monday, tuesday, ... sunday)
-
+        # get user input for day of week (all, monday, tuesday, ... sunday)
+        while True:
+            day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All?").lower()
+            if day in days:
+                break
+            else:
+                print("Invalid input. Please choose one of the available day's options.")
+    elif(time_filter=="month"):
+        day="all"
+        while True:
+            month = input("Which month? January, February, March, April, May, June or All?").lower()
+            if month in months:
+                break
+            else:
+                print("Invalid input. Please choose one of the available month's options")
+    elif(time_filter=="day"):
+        month="all"
+        while True:
+            day = input("Which day? Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday or All?").lower()
+            if day in days:
+                break
+            else:
+                print("Invalid input. Please choose one of the available day's options.")
+    else:
+        #none
+        day="all"
+        month="all"
 
     print('-'*40)
     return city, month, day
@@ -40,7 +85,17 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
+    #Firstly, load data for chosen city
+    df = pd.read_csv(CITY_DATA[city])
 
+    #Then we convert the Start Time column to datetime like in the practice problem
+    df['Start Time'] = pd.to_datetime(df['Start Time'])
+
+    #Extract Month and day and hour as columns from the Start Time column
+    df['month'] = df['Start Time'].dt.month
+    df['day'] = df['Start Time'].dt.day_name()
+    df['hour'] = df['Start Time'].dt.hour
+    
 
     return df
 
