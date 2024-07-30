@@ -221,7 +221,7 @@ def user_stats(df):
     
 
     # Display counts of gender
-    if(df['city']!="Washington"):
+    if 'Gender' in df.columns:
         print("Calculating The Count Of Gender...\n")
         start_time = time.time()
         print("Gender Counts:\n", df['Gender'].value_counts())
@@ -231,7 +231,7 @@ def user_stats(df):
         print("Gender is Not Regarded in The Washington CSV File")
 
     # Display earliest, most recent, and most common year of birth
-    if(df['city']!="Washington"):
+    if 'Birth Year' in df.columns:
         earliest_year_of_birth = int(df['Birth Year'].min())
         most_recent_year_of_birth = int(df['Birth Year'].max())
         most_common_year_of_birth = int(df['Birth Year'].mode()[0])
@@ -242,7 +242,7 @@ def user_stats(df):
         print("Birth Date is Not Regarded in The Washington CSV File")
 
 
-    print("\All The Statistics took %s seconds." % (time.time() - total_start_time))
+    print("\nAll The Statistics took %s seconds." % (time.time() - total_start_time))
     print('-'*40)
 
 
